@@ -1,4 +1,5 @@
-import {postType} from './postType'
-import {vfbHerrenType} from './vfbHerrenType'
+import {mtbToursLadiesType} from './mtbToursLadies'
+import {mtbToursMen} from './mtbToursMen'
+import {mtbEventsLadies} from './mtbEventsLadies'
 
-export const schemaTypes = [postType, vfbHerrenType]
+export const schemaTypes = [mtbToursMen, mtbToursLadiesType, mtbEventsLadies]

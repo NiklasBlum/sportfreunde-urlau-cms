@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-export const vfbHerrenType = defineType({
-  name: 'vfbHerren',
-  title: 'Radsport Herren (VFB)',
+export const mtbToursMen = defineType({
+  name: 'mtbToursMen',
+  title: 'Radsport Herren - Touren',
   type: 'document',
   fields: [
     defineField({
