@@ -58,8 +58,15 @@ export const radsport_damen_tours = defineType({
     },
     prepare({date, route, status}) {
       const statusIcon = status === 'tour' ? '✅' : status === 'cancelled' ? '❌' : '⏸️'
+      const formattedDate = date
+        ? new Date(date).toLocaleDateString('de-DE', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          })
+        : ''
       return {
-        title: `${statusIcon} ${date ?? ''}`,
+        title: `${statusIcon} ${formattedDate}`,
         subtitle: route ?? '—',
       }
     },
