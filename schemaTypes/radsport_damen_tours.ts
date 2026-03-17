@@ -1,7 +1,7 @@
 import {defineField, defineType} from 'sanity'
 
-export const mtbToursLadiesType = defineType({
-  name: 'mtbToursLadies',
+export const radsport_damen_tours = defineType({
+  name: 'radsport_damen_tours',
   title: 'Radsport Damen - Touren',
   type: 'document',
   fields: [

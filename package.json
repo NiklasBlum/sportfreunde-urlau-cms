@@ -1,9 +1,6 @@
 {
-  "name": "sportfreunde-urlau",
+  "name": "sportfreunde-urlau-cms",
   "private": true,
-  "version": "1.0.0",
-  "main": "package.json",
-  "license": "UNLICENSED",
   "scripts": {
     "build": "sanity build",
     "deploy": "sanity deploy",

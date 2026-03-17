@@ -1,7 +1,7 @@
 import {defineField, defineType} from 'sanity'
 
-export const mtbToursMen = defineType({
-  name: 'mtbToursMen',
+export const radsport_herren_tours = defineType({
+  name: 'radsport_herren_tours',
   title: 'Radsport Herren - Touren',
   type: 'document',
   fields: [
@@ -12,6 +12,7 @@ export const mtbToursMen = defineType({
       options: {dateFormat: 'DD.MM.YYYY'},
       initialValue: () => new Date().toISOString().slice(0, 10),
       validation: (rule) => rule.required(),
+      description: 'Datum der Tour, z. B. "01.01.2026"',
     }),
     defineField({
       name: 'route',
@@ -40,14 +41,6 @@ export const mtbToursMen = defineType({
       },
       initialValue: 'tour',
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'season',
-      title: 'Saison (Jahr)',
-      type: 'number',
-      description: 'Bitte das aktuelle Jahr eingeben, z. B. 2026',
-      initialValue: () => new Date().getFullYear(),
-      validation: (rule) => rule.required().integer().min(2020).max(2100),
     }),
   ],
   preview: {

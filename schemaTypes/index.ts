@@ -1,5 +1,3 @@
-import {mtbToursLadiesType} from './mtbToursLadies'
-import {mtbToursMen} from './mtbToursMen'
-import {mtbEventsLadies} from './mtbEventsLadies'
+import {radsport_herren_tours} from './radsport_herren_tours'
 
-export const schemaTypes = [mtbToursMen, mtbToursLadiesType, mtbEventsLadies]
+export const schemaTypes = [radsport_herren_tours]
