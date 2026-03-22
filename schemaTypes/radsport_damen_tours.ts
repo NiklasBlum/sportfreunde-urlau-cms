@@ -6,18 +6,19 @@ export const radsport_damen_tours = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'route',
+      title: 'Route',
+      type: 'string',
+      description: 'Streckenbeschreibung, z. B. "Isny – Eggental – Urlau"',
+    }),
+    defineField({
       name: 'date',
       title: 'Datum',
       type: 'date',
       options: {dateFormat: 'DD.MM.YYYY'},
       initialValue: () => new Date().toISOString().slice(0, 10),
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'route',
-      title: 'Route',
-      type: 'string',
-      description: 'Streckenbeschreibung, z. B. "Isny – Eggental – Urlau"',
+      description: 'Datum der Tour, z. B. "01.01.2026"',
     }),
     defineField({
       name: 'departureTime',
@@ -41,23 +42,13 @@ export const radsport_damen_tours = defineType({
       initialValue: 'tour',
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: 'season',
-      title: 'Saison (Jahr)',
-      type: 'number',
-      description: 'Bitte das aktuelle Jahr eingeben, z. B. 2026',
-      initialValue: () => new Date().getFullYear(),
-      validation: (rule) => rule.required().integer().min(2020).max(2100),
-    }),
   ],
   preview: {
     select: {
       date: 'date',
       route: 'route',
-      status: 'status',
     },
-    prepare({date, route, status}) {
-      const statusIcon = status === 'tour' ? '✅' : status === 'cancelled' ? '❌' : '⏸️'
+    prepare({date, route}) {
       const formattedDate = date
         ? new Date(date).toLocaleDateString('de-DE', {
             day: '2-digit',
@@ -66,8 +57,8 @@ export const radsport_damen_tours = defineType({
           })
         : ''
       return {
-        title: `${statusIcon} ${formattedDate}`,
-        subtitle: route ?? '—',
+        title: `${route ?? 'Tour'}`,
+        subtitle: formattedDate ?? '—',
       }
     },
   },

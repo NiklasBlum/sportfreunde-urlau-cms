@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-export const radsport_damen_events = defineType({
-  name: 'radsport_damen_events',
-  title: 'Radsport Damen - Events',
+export const sportmaedels_events = defineType({
+  name: 'sportmaedels_events',
+  title: 'Sportmädels - Events',
   type: 'document',
   fields: [
     defineField({
@@ -15,7 +15,7 @@ export const radsport_damen_events = defineType({
       name: 'description',
       title: 'Beschreibung',
       type: 'text',
-      rows: 10,
+      rows: 4,
     }),
     defineField({
       name: 'date',
@@ -49,7 +49,7 @@ export const radsport_damen_events = defineType({
       title: 'URL-Verlinkung',
       type: 'slug',
       options: {
-        source: (doc) => `${doc.headline ?? ''}-${doc.date ?? ''}`,
+        source: 'headline',
         maxLength: 96,
       },
       validation: (rule) => rule.required(),

@@ -6,6 +6,12 @@ export const radsport_herren_tours = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'route',
+      title: 'Route',
+      type: 'string',
+      description: 'Streckenbeschreibung, z. B. "Isny – Eggental – Urlau"',
+    }),
+    defineField({
       name: 'date',
       title: 'Datum',
       type: 'date',
@@ -13,12 +19,6 @@ export const radsport_herren_tours = defineType({
       initialValue: () => new Date().toISOString().slice(0, 10),
       validation: (rule) => rule.required(),
       description: 'Datum der Tour, z. B. "01.01.2026"',
-    }),
-    defineField({
-      name: 'route',
-      title: 'Route',
-      type: 'string',
-      description: 'Streckenbeschreibung, z. B. "Isny – Eggental – Urlau"',
     }),
     defineField({
       name: 'departureTime',
@@ -47,10 +47,8 @@ export const radsport_herren_tours = defineType({
     select: {
       date: 'date',
       route: 'route',
-      status: 'status',
     },
-    prepare({date, route, status}) {
-      const statusIcon = status === 'tour' ? '✅' : status === 'cancelled' ? '❌' : '⏸️'
+    prepare({date, route}) {
       const formattedDate = date
         ? new Date(date).toLocaleDateString('de-DE', {
             day: '2-digit',
@@ -59,8 +57,8 @@ export const radsport_herren_tours = defineType({
           })
         : ''
       return {
-        title: `${formattedDate} ${statusIcon}`,
-        subtitle: route ?? '—',
+        title: `${route ?? 'Tour'}`,
+        subtitle: formattedDate ?? '—',
       }
     },
   },
