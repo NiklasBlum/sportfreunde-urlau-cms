@@ -6,7 +6,6 @@ import {schemaTypes} from './schemaTypes'
 export default defineConfig({
   name: 'default',
   title: 'Sportfreunde Urlau',
-
   projectId: 'n07z17nt',
   dataset: 'production',
 
