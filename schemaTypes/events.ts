@@ -7,22 +7,44 @@ export const events = defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Titel',
+      title: 'Name des Events/Veranstaltung',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'info',
       title: 'Info',
+      description: 'Ort, Uhrzeit (von-bis) etc.',
       type: 'text',
       rows: 1,
     }),
     defineField({
-      name: 'description',
-      title: 'Beschreibung',
-      type: 'text',
-      rows: 10,
-      description: 'Ausführliche Beschreibung, wird auf der Detailseite angezeigt',
+      name: 'richText',
+      title: 'Beschreibung (Rich Text)',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+              {title: 'Underline', value: 'underline'},
+              {title: 'Strike', value: 'strike-through'},
+            ],
+            annotations: [
+              {
+                title: 'Link',
+                name: 'link',
+                type: 'object',
+                fields: [{name: 'href', title: 'URL', type: 'string'}],
+              },
+            ],
+          },
+        },
+      ],
+      description:
+        'Ausführliche Beschreibung im Rich-Text-Format, wird auf der Detailseite angezeigt',
     }),
     defineField({
       name: 'tag',
@@ -36,6 +58,24 @@ export const events = defineType({
         ],
         layout: 'radio',
       },
+    }),
+    defineField({
+      name: 'images',
+      title: 'Bilder',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: {hotspot: true},
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Bildbeschreibung (optional)',
+              type: 'string',
+            }),
+          ],
+        },
+      ],
     }),
     defineField({
       name: 'slug',
