@@ -1,21 +1,22 @@
 import {defineField, defineType} from 'sanity'
 
-export const sportmaedels_events = defineType({
-  name: 'sportmaedels_events',
-  title: 'Sportmädels - Events',
+export const news_reports = defineType({
+  name: 'news_reports',
+  title: 'News & Berichte',
   type: 'document',
   fields: [
     defineField({
-      name: 'headline',
-      title: 'Überschrift',
+      name: 'title',
+      title: 'Name der News/Berichts',
       type: 'string',
-      validation: (rule) => rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'description',
-      title: 'Beschreibung',
+      name: 'info',
+      title: 'Info',
+      description: 'Ort, Uhrzeit (von-bis) etc.',
       type: 'text',
-      rows: 4,
+      rows: 1,
     }),
     defineField({
       name: 'richText',
@@ -42,16 +43,20 @@ export const sportmaedels_events = defineType({
           },
         },
       ],
-      description: 'Beschreibung im Rich-Text-Format',
+      description:
+        'Ausführliche Beschreibung im Rich-Text-Format, wird auf der Detailseite angezeigt',
     }),
     defineField({
-      name: 'date',
-      title: 'Datum',
-      type: 'date',
-      options: {dateFormat: 'DD.MM.YYYY'},
-      initialValue: () => new Date().toISOString().slice(0, 10),
-      validation: (rule) => rule.required(),
-      description: 'Datum des Events, z. B. "01.02.2026"',
+      name: 'tag',
+      title: 'Kategorie',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'News', value: 'News'},
+          {title: 'Bericht', value: 'Bericht'},
+        ],
+        layout: 'radio',
+      },
     }),
     defineField({
       name: 'images',
@@ -76,32 +81,38 @@ export const sportmaedels_events = defineType({
       title: 'URL-Verlinkung',
       type: 'slug',
       options: {
-        source: 'headline',
+        source: (doc) => `${doc.title ?? ''}-${doc.date ?? ''}`,
         maxLength: 96,
       },
-      validation: (rule) => rule.required(),
       description: 'URL-Name für Verlinkungen, wird aus der Überschrift erzeugt.',
+    }),
+    defineField({
+      name: 'date',
+      title: 'Datum',
+      type: 'date',
+      options: {dateFormat: 'DD.MM.YYYY'},
+      initialValue: () => new Date().toISOString().slice(0, 10),
+      validation: (Rule) => Rule.required(),
+      description: 'Datum des Events',
     }),
   ],
   preview: {
     select: {
-      headline: 'headline',
+      title: 'title',
       date: 'date',
-      media: 'images.0',
     },
-    prepare({headline, date, media}) {
+    prepare({title, date}) {
       const formattedDate = date
         ? new Date(date).toLocaleDateString('de-DE', {
             day: '2-digit',
-            month: '2-digit',
+            month: 'short',
             year: 'numeric',
           })
         : 'Ohne Datum'
 
       return {
-        title: `${headline ?? 'Ohne Überschrift'}`,
+        title: title ?? 'Ohne Titel',
         subtitle: formattedDate,
-        media,
       }
     },
   },

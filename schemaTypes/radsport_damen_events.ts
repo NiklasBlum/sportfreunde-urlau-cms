@@ -18,6 +18,33 @@ export const radsport_damen_events = defineType({
       rows: 10,
     }),
     defineField({
+      name: 'richText',
+      title: 'Beschreibung (Rich Text)',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+              {title: 'Underline', value: 'underline'},
+              {title: 'Strike', value: 'strike-through'},
+            ],
+            annotations: [
+              {
+                title: 'Link',
+                name: 'link',
+                type: 'object',
+                fields: [{name: 'href', title: 'URL', type: 'string'}],
+              },
+            ],
+          },
+        },
+      ],
+      description: 'Beschreibung im Rich-Text-Format',
+    }),
+    defineField({
       name: 'date',
       title: 'Datum',
       type: 'date',

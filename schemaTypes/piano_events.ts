@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-export const sportmaedels_events = defineType({
-  name: 'sportmaedels_events',
-  title: 'Sportmädels - Events',
+export const piano_events = defineType({
+  name: 'piano_events',
+  title: 'Piano - Events',
   type: 'document',
   fields: [
     defineField({
@@ -10,12 +10,6 @@ export const sportmaedels_events = defineType({
       title: 'Überschrift',
       type: 'string',
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'description',
-      title: 'Beschreibung',
-      type: 'text',
-      rows: 4,
     }),
     defineField({
       name: 'richText',
