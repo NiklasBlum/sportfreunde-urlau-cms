@@ -12,12 +12,6 @@ export const sportmaedels_events = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'description',
-      title: 'Beschreibung',
-      type: 'text',
-      rows: 4,
-    }),
-    defineField({
       name: 'richText',
       title: 'Beschreibung (Rich Text)',
       type: 'array',
